@@ -9,8 +9,8 @@ const SearchPage = ({ books, onChangeShelf }) => {
 
     const updateQuery = (query) => {
        
-        let trimmedQuery = query?.replace(/^\s+/, '')
-        setText(trimmedQuery)
+        let trimmedText = query?.replace(/^\s+/, '')
+        setText(trimmedText)
        
         fetchMatchedBooks(query)
     }
