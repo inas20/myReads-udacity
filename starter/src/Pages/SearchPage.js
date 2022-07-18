@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { search } from '../BooksAPI';
 import Book from '../Components/Book';
+import PropTypes from 'prop-types'
 
 const SearchPage = ({ books, onChangeShelf }) => {
     const [matchedBooks, setMatchedBooks] = useState([]);
@@ -92,6 +93,11 @@ const SearchPage = ({ books, onChangeShelf }) => {
             </div>
         </div>
     )
+}
+
+SearchPage.propTypes = {
+    books: PropTypes.array,
+    onChangeShelf: PropTypes.func,
 }
 
 export default SearchPage;

@@ -15,11 +15,10 @@ function App() {
   }, [])
 
   const onChangeShelf = (book,shelf) => {
-    update(book, shelf).then(res=>{
-        getAll().then((books) => {
-          setBooks(books)
-        })
-    })
+    book.shelf = shelf;
+    update(book, shelf).then(() => {
+      setBooks([...books.filter((b) => b.id !== book.id), book]);
+    });
     
   }
 

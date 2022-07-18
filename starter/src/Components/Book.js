@@ -1,8 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 const Book = ({book, onChangeShelf, currentShelf})=>{
     const {title,authors,imageLinks} = book;
-
+    const shelves = [
+        {
+            id: "1",
+            value: "currentlyReading",
+            label: "Currently Reading"
+        },
+        { id: "2", value: "wantToRead", label: "Want To Read" },
+        { id: "3", value: "read", label: "Read" }
+    ]
     let hasCoverImage;
     if (imageLinks) {
         hasCoverImage = imageLinks?.thumbnail
@@ -20,11 +29,11 @@ const Book = ({book, onChangeShelf, currentShelf})=>{
                                 onChange={(e) => onChangeShelf(book, e.target.value)}
                                 value={currentShelf}
                             >
-                                <option value="move" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
+                                 <option value="move" disabled>Move to...</option>
+                                {shelves.map(shelf=>(
+                                <option key= {shelf.value} value={shelf?.value}>{shelf.label}</option>
+                                ))}
+                                
                             </select>
                         </div>
                 </div>
@@ -33,5 +42,16 @@ const Book = ({book, onChangeShelf, currentShelf})=>{
             </div>
     )
 }
+
+Book.propTypes = {
+    book: PropTypes.shape({
+        title : PropTypes.string,
+        authors :PropTypes.array,
+        imageLinks : PropTypes.object
+        
+      }),
+    onChangeShelf : PropTypes.func,
+    currentShelf: PropTypes.string
+  }
 
 export default Book;
